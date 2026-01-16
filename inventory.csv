@@ -1,0 +1,188 @@
+Year,Region,Sector,Source,SF6,NF3
+1990,China,total,this study,72.33731639,0.1024
+1991,China,total,this study,105.5512277,0.1322
+1992,China,total,this study,143.664129,0.153
+1993,China,total,this study,191.9646774,0.1738
+1994,China,total,this study,240.5176555,0.2032
+1995,China,total,this study,284.5250532,0.2438
+1996,China,total,this study,307.1260069,0.2821
+1997,China,total,this study,345.3457246,0.3264
+1998,China,total,this study,366.821176,0.3411
+1999,China,total,this study,415.6678053,0.7311
+2000,China,total,this study,441.3517884,1.9946
+2001,China,total,this study,483.9801326,3.855
+2002,China,total,this study,566.7765878,5.9565
+2003,China,total,this study,598.9495307,9.5452
+2004,China,total,this study,671.8029442,18.77756
+2005,China,total,this study,741.4267087,28.07526
+2006,China,total,this study,946.7479698,38.52009
+2007,China,total,this study,1198.143322,73.23825
+2008,China,total,this study,1385.616646,86.32781
+2009,China,total,this study,1616.619546,107.51053
+2010,China,total,this study,1860.406601,137.40028
+2011,China,total,this study,2114.309221,187.72005
+2012,China,total,this study,2393.696748,226.78807
+2013,China,total,this study,2694.595287,306.50424
+2014,China,total,this study,3002.873062,447.11437
+2015,China,total,this study,3341.826836,610.15321
+2016,China,total,this study,3721.065009,850.48201
+2017,China,total,this study,4127.124393,1067.59959
+2018,China,total,this study,4568.448918,1224.12071
+2019,China,total,this study,5047.46222,1692.89279
+2020,China,total,this study,5395.766376,1596.740502
+2021,China,total,this study,5627.954439,1411.889873
+2022,China,total,this study,5909.97031,1725.53495
+2023,China,total,this study,6444.674261,1824.19725
+2024,China,total,this study,6941.48059,1934.636343
+1990,China,total,EDGAR,79.37,
+1991,China,total,EDGAR,110.1,0.00545058
+1992,China,total,EDGAR,142.72,0.0218023
+1993,China,total,EDGAR,153.66,0.0490552
+1994,China,total,EDGAR,166.35,0.0872093
+1995,China,total,EDGAR,193.18,0.136265
+1996,China,total,EDGAR,225.21,0.196221
+1997,China,total,EDGAR,221.49,0.267078
+1998,China,total,EDGAR,211.68,0.348837
+1999,China,total,EDGAR,314.99,0.441497
+2000,China,total,EDGAR,394.27,0.545058
+2001,China,total,EDGAR,445.26,3.040905
+2002,China,total,EDGAR,598.36,6.46041
+2003,China,total,EDGAR,837.18,9.526405
+2004,China,total,EDGAR,983.93,14.016819
+2005,China,total,EDGAR,1193.72,28.611953
+2006,China,total,EDGAR,1426.92,30.91556
+2007,China,total,EDGAR,1639.05,35.363372
+2008,China,total,EDGAR,1851.71,8.295266
+2009,China,total,EDGAR,2098.95,23.977298
+2010,China,total,EDGAR,2386.35,12.127077
+2011,China,total,EDGAR,2584.47,19.523105
+2012,China,total,EDGAR,2780.59,18.499698
+2013,China,total,EDGAR,3037.24,34.110465
+2014,China,total,EDGAR,3276.58,33.391876
+2015,China,total,EDGAR,3566.38,31.838908
+2016,China,total,EDGAR,3789.54,23.088569
+2017,China,total,EDGAR,4063.33,24.517555
+2018,China,total,EDGAR,4335.59,32.529598
+2019,China,total,EDGAR,4592,32.759828
+2020,China,total,EDGAR,4864.17,35.983581
+2021,China,total,EDGAR,5145.75,39.80558967
+2022,China,total,EDGAR,5437.36,42.23092022
+2023,China,total,EDGAR,5719.14,45.38795096
+2011,China,total,An et al.(2024),2578.27,
+2012,China,total,An et al.(2024),2745.86,
+2013,China,total,An et al.(2024),3893.19,
+2014,China,total,An et al.(2024),3261.51,
+2015,China,total,An et al.(2024),3815.84,
+2016,China,total,An et al.(2024),3661.14,
+2017,China,total,An et al.(2024),4009.21,
+2018,China,total,An et al.(2024),4963.17,
+2019,China,total,An et al.(2024),4395.95,
+2020,China,total,An et al.(2024),5427.26,
+2021,China,total,An et al.(2024),5143.65,
+2017,China,total,Weng et al.(2023),,946.3095342
+2018,China,total,Weng et al.(2023),,1183.193285
+2019,China,total,Weng et al.(2023),,1455.613927
+2020,China,total,Weng et al.(2023),,1596.740502
+2021,China,total,Weng et al.(2023),,1411.889873
+1990,Global,total,AGAGE(by Western et al.),5053.55389,
+1991,Global,total,AGAGE(by Western et al.),5263.949247,
+1992,Global,total,AGAGE(by Western et al.),5321.402507,
+1993,Global,total,AGAGE(by Western et al.),5512.469052,
+1994,Global,total,AGAGE(by Western et al.),5715.118585,
+1995,Global,total,AGAGE(by Western et al.),5881.709315,
+1996,Global,total,AGAGE(by Western et al.),5911.746069,
+1997,Global,total,AGAGE(by Western et al.),5828.783152,
+1998,Global,total,AGAGE(by Western et al.),5670.184898,
+1999,Global,total,AGAGE(by Western et al.),5520.783586,
+2000,Global,total,AGAGE(by Western et al.),5474.472926,
+2001,Global,total,AGAGE(by Western et al.),5464.817828,
+2002,Global,total,AGAGE(by Western et al.),5523.829283,
+2003,Global,total,AGAGE(by Western et al.),5646.94048,
+2004,Global,total,AGAGE(by Western et al.),5832.415432,
+2005,Global,total,AGAGE(by Western et al.),6115.703264,
+2006,Global,total,AGAGE(by Western et al.),6464.412913,
+2007,Global,total,AGAGE(by Western et al.),6783.942966,
+2008,Global,total,AGAGE(by Western et al.),7084.867734,
+2009,Global,total,AGAGE(by Western et al.),7219.102653,
+2010,Global,total,AGAGE(by Western et al.),7418.950869,
+2011,Global,total,AGAGE(by Western et al.),7639.555427,
+2012,Global,total,AGAGE(by Western et al.),8029.512342,
+2013,Global,total,AGAGE(by Western et al.),8240.834897,
+2014,Global,total,AGAGE(by Western et al.),8316.087384,
+2015,Global,total,AGAGE(by Western et al.),8513.651832,
+2016,Global,total,AGAGE(by Western et al.),8707.586369,
+2017,Global,total,AGAGE(by Western et al.),8890.144276,
+2018,Global,total,AGAGE(by Western et al.),8984.415657,
+2019,Global,total,AGAGE(by Western et al.),9083.683823,
+2020,Global,total,AGAGE(by Western et al.),9224.735299,
+2021,Global,total,AGAGE(by Western et al.),9413.999204,
+2022,Global,total,AGAGE(by Western et al.),9551.552613,
+2023,Global,total,AGAGE(by Western et al.),9576.647623,
+1990,Global,total,AGAGE(by Western et al.),,36.32814094
+1991,Global,total,AGAGE(by Western et al.),,71.2370206
+1992,Global,total,AGAGE(by Western et al.),,102.4979573
+1993,Global,total,AGAGE(by Western et al.),,133.4024791
+1994,Global,total,AGAGE(by Western et al.),,160.6228206
+1995,Global,total,AGAGE(by Western et al.),,199.5889759
+1996,Global,total,AGAGE(by Western et al.),,212.5860066
+1997,Global,total,AGAGE(by Western et al.),,228.1567656
+1998,Global,total,AGAGE(by Western et al.),,248.3988783
+1999,Global,total,AGAGE(by Western et al.),,277.5909434
+2000,Global,total,AGAGE(by Western et al.),,324.8456739
+2001,Global,total,AGAGE(by Western et al.),,366.1662443
+2002,Global,total,AGAGE(by Western et al.),,430.3773748
+2003,Global,total,AGAGE(by Western et al.),,465.8333414
+2004,Global,total,AGAGE(by Western et al.),,537.5502498
+2005,Global,total,AGAGE(by Western et al.),,675.3337288
+2006,Global,total,AGAGE(by Western et al.),,758.9516193
+2007,Global,total,AGAGE(by Western et al.),,861.8316941
+2008,Global,total,AGAGE(by Western et al.),,904.7280202
+2009,Global,total,AGAGE(by Western et al.),,1039.944222
+2010,Global,total,AGAGE(by Western et al.),,1136.506484
+2011,Global,total,AGAGE(by Western et al.),,1251.223187
+2012,Global,total,AGAGE(by Western et al.),,1296.48746
+2013,Global,total,AGAGE(by Western et al.),,1409.11059
+2014,Global,total,AGAGE(by Western et al.),,1521.989649
+2015,Global,total,AGAGE(by Western et al.),,1716.139476
+2016,Global,total,AGAGE(by Western et al.),,1973.86624
+2017,Global,total,AGAGE(by Western et al.),,2308.227493
+2018,Global,total,AGAGE(by Western et al.),,2619.426402
+2019,Global,total,AGAGE(by Western et al.),,2917.447307
+2020,Global,total,AGAGE(by Western et al.),,3198.838674
+2021,Global,total,AGAGE(by Western et al.),,3397.253938
+2022,Global,total,AGAGE(by Western et al.),,3501.158952
+2023,Global,total,AGAGE(by Western et al.),,3532.411939
+1990,Global,total,EDGAR,5815.71139,
+1991,Global,total,EDGAR,5977.191097,
+1992,Global,total,EDGAR,6038.69398,
+1993,Global,total,EDGAR,6019.881272,
+1994,Global,total,EDGAR,5944.53577,
+1995,Global,total,EDGAR,6013.537593,
+1996,Global,total,EDGAR,5968.055838,
+1997,Global,total,EDGAR,5735.991017,
+1998,Global,total,EDGAR,5388.175471,
+1999,Global,total,EDGAR,5327.869247,
+2000,Global,total,EDGAR,5171.450805,
+2001,Global,total,EDGAR,5114.78018,
+2002,Global,total,EDGAR,7159.336189,
+2003,Global,total,EDGAR,7398.832241,
+2004,Global,total,EDGAR,7635.525026,
+2005,Global,total,EDGAR,7257.130513,
+2006,Global,total,EDGAR,6730.486066,
+2007,Global,total,EDGAR,7028.161982,
+2008,Global,total,EDGAR,7185.152281,
+2009,Global,total,EDGAR,7066.681222,
+2010,Global,total,EDGAR,6940.904158,
+2011,Global,total,EDGAR,7096.281317,
+2012,Global,total,EDGAR,7413.245995,
+2013,Global,total,EDGAR,7667.991892,
+2014,Global,total,EDGAR,7779.802709,
+2015,Global,total,EDGAR,7934.418587,
+2016,Global,total,EDGAR,8127.472421,
+2017,Global,total,EDGAR,8387.174072,
+2018,Global,total,EDGAR,8851.809857,
+2019,Global,total,EDGAR,9198.183606,
+2020,Global,total,EDGAR,9481.50787,
+2021,Global,total,EDGAR,9851.995868,
+2022,Global,total,EDGAR,10226.96932,
+2023,Global,total,EDGAR,10572.97183,
