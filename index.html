@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OFED - Ozone-depleting Substances & F-gases Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">OFED Database</div>
+        <div class="nav-links">
+            <a href="index.html">Introduction</a>
+            <a href="inventory.html">Inventory</a>
+            <a href="inversion.html">Inversion</a>
+            <a href="comparison.html">Datasets</a>
+            <a href="team.html">About Team</a>
+        </div>
+        <div class="auth-btn" onclick="openModal()">Login / Sign up</div>
+    </nav>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 style="text-align:center;">Register Access</h2>
+            <p style="font-size: 12px; color: #666; margin-bottom: 20px;">
+                Note: Email verification is required to download data.
+            </p>
+            <form id="signupForm">
+                <div class="form-group"><label>Full Name</label><input type="text" required></div>
+                <div class="form-group"><label>Country</label><input type="text" required></div>
+                <div class="form-group"><label>Affiliation (Level 1)</label><input type="text" required></div>
+                <div class="form-group"><label>Affiliation (Level 2)</label><input type="text" required></div>
+                <div class="form-group"><label>Email Address</label><input type="email" required></div>
+                <div class="form-group"><label>Password</label><input type="password" required></div>
+                <button type="submit" class="submit-btn">Register & Verify Email</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>OFED Database</h1>
+        <p>Global & Regional Emissions of Ozone-depleting Substances and Fluorinated Gases</p>
+        <p style="font-size: 0.9em; max-width: 800px; margin: 20px auto; opacity: 0.8;">
+            Providing comprehensive data support for the Montreal Protocol and UNFCCC compliance. 
+            High-resolution inventory and top-down inversion results available.
+        </p>
+    </div>
+
+    <div class="cards-container">
+        <div class="card">
+            <h3>🏭 Inventory Emission</h3>
+            <p>Bottom-up emission estimates based on activity data.</p>
+            <a href="inventory.html" style="color:var(--primary); font-weight:bold;">View Data →</a>
+        </div>
+        <div class="card">
+            <h3>🛰️ Inversion Emission</h3>
+            <p>Top-down estimates constrained by atmospheric observations.</p>
+            <a href="inversion.html" style="color:var(--primary); font-weight:bold;">View Data →</a>
+        </div>
+        <div class="card">
+            <h3>📊 Data Comparison</h3>
+            <p>Compare OFED results with other global datasets.</p>
+            <a href="comparison.html" style="color:var(--primary); font-weight:bold;">View Charts →</a>
+        </div>
+    </div>
+
+    <footer style="background:#333; color:white; text-align:center; padding:20px;">
+        Contact: support@ofed-database.com | © 2026 OFED Team
+    </footer>
+
+    <script>
+        // 简单的弹窗控制逻辑
+        function openModal() { document.getElementById('authModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('authModal').style.display = 'none'; }
+
+        // 模拟注册提交
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("This requires a backend (Firebase). Currently in demo mode.");
+            // 在这里接入 Firebase 代码
+        });
+    </script>
+</body>
+</html>
