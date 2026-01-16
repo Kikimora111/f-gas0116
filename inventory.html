@@ -5,15 +5,15 @@
     <title>Inventory Emissions - OFED</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <style>
+        /* 页面独有的布局样式 */
         .dashboard-layout { display: flex; padding: 20px 5%; gap: 20px; }
         .sidebar { width: 250px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
         .main-content { flex: 1; }
         .chart-box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; height: 500px; }
-        .info-section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background: #f4f4f4; }
+        select { width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; }
+        label { font-weight: bold; font-size: 0.9em; color: #555; display: block; margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -22,67 +22,131 @@
         <div class="logo">OFED Database</div>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="inventory.html" style="font-weight:bold; color:var(--primary);">Inventory</a>
+            <a href="inventory.html" style="font-weight:bold; color:#0056b3;">Inventory</a>
             <a href="inversion.html">Inversion</a>
-            </div>
+            <a href="comparison.html">Datasets</a>
+            <a href="team.html">About Team</a>
+        </div>
         <div class="auth-btn">Login</div>
     </nav>
 
     <div class="dashboard-layout">
         <div class="sidebar">
             <h3>Filters</h3>
-            <div class="form-group">
-                <label>Substance</label>
-                <select style="width:100%; padding:8px;"><option>HFC-134a</option><option>SF6</option></select>
-            </div>
-            <div class="form-group">
-                <label>Year Range</label>
-                <input type="range" min="1990" max="2025" style="width:100%">
-            </div>
-            <div class="form-group">
-                <label>Region</label>
-                <select style="width:100%; padding:8px;"><option>Global</option><option>China</option><option>USA</option></select>
-            </div>
-            <div class="form-group">
-                <label>Sector</label>
-                <select style="width:100%; padding:8px;"><option>All Sectors</option><option>Refrigeration</option></select>
-            </div>
-            <button class="submit-btn" style="margin-top:20px;">Update Chart</button>
-            <button class="submit-btn" style="margin-top:10px; background:#666;" disabled>Download Data (Login Required)</button>
+            
+            <label>1. Region</label>
+            <select id="region-select"><option>Loading...</option></select>
+
+            <label>2. Sector</label>
+            <select id="sector-select"><option>Loading...</option></select>
+
+            <label>3. Substance</label>
+            <select id="substance-select"><option>Loading...</option></select>
+
+            <p style="font-size:12px; color:#999; margin-top:20px;">
+                Note: Charts update automatically upon selection.
+            </p>
         </div>
 
         <div class="main-content">
             <div class="chart-box" id="chart-container"></div>
-            
-            <div class="info-section">
+            <div style="background:white; padding:20px; border-radius:8px;">
                 <h3>Methodology</h3>
-                <p>Detailed description of the bottom-up inventory methodology...</p>
-            </div>
-
-            <div class="info-section">
-                <h3>Publications</h3>
-                <table>
-                    <thead><tr><th>Substance</th><th>Year Range</th><th>Region</th><th>Reference</th></tr></thead>
-                    <tbody>
-                        <tr><td>HFCs</td><td>1990-2020</td><td>China</td><td>Zhang et al. (2024)</td></tr>
-                        <tr><td>SF6</td><td>2000-2022</td><td>Global</td><td>Wang et al. (2025)</td></tr>
-                    </tbody>
-                </table>
+                <p>This inventory is built based on bottom-up activity data...</p>
             </div>
         </div>
     </div>
 
     <script>
-        // 初始化图表 (这里可以复用你之前的 JS 代码逻辑)
         var myChart = echarts.init(document.getElementById('chart-container'));
-        var option = {
-            title: { text: 'Inventory Emissions Trend' },
-            tooltip: { trigger: 'axis' },
-            xAxis: { type: 'category', data: ['1990', '1995', '2000', '2005', '2010', '2015', '2020'] },
-            yAxis: { type: 'value' },
-            series: [{ data: [120, 132, 101, 134, 90, 230, 210], type: 'line', smooth: true }]
-        };
-        myChart.setOption(option);
+        var globalData = [];
+        var distinctYears = [];
+
+        myChart.showLoading();
+
+        // 【关键修改】读取 inventory.csv
+        Papa.parse("inventory.csv?t=" + new Date().getTime(), {
+            download: true, header: true, dynamicTyping: true, skipEmptyLines: true,
+            complete: function(results) {
+                myChart.hideLoading();
+                
+                // 清洗列名
+                var columns = results.meta.fields.map(c => c.trim().replace(/^\ufeff/, ''));
+                var rawData = results.data;
+                // 简单的键名容错
+                if (results.meta.fields[0] !== columns[0]) {
+                    rawData = rawData.map(row => {
+                        var newRow = {}; results.meta.fields.forEach((k, i) => newRow[columns[i]] = row[k]); return newRow;
+                    });
+                }
+
+                globalData = rawData;
+                distinctYears = Array.from(new Set(rawData.map(r => r.Year))).sort((a,b)=>a-b);
+
+                // 初始化筛选器，注意这里要把 Sector 加进去
+                initSelectors(columns);
+            },
+            error: function() { alert("File not found: inventory.csv"); }
+        });
+
+        function initSelectors(columns) {
+            var regionSel = document.getElementById('region-select');
+            var sectorSel = document.getElementById('sector-select');
+            var subSel = document.getElementById('substance-select');
+
+            // 提取选项
+            var regions = Array.from(new Set(globalData.map(r => r.Region))).sort();
+            var sectors = Array.from(new Set(globalData.map(r => r.Sector))).sort();
+            var substances = columns.filter(c => !['Year','Region','Sector','Source'].includes(c));
+
+            // 填充下拉框
+            fillSelect(regionSel, regions);
+            fillSelect(sectorSel, sectors);
+            fillSelect(subSel, substances);
+
+            // 绑定事件
+            regionSel.onchange = updateChart;
+            sectorSel.onchange = updateChart;
+            subSel.onchange = updateChart;
+            
+            updateChart();
+        }
+
+        function fillSelect(dom, list) {
+            dom.innerHTML = "";
+            list.forEach(item => dom.add(new Option(item, item)));
+        }
+
+        function updateChart() {
+            var region = document.getElementById('region-select').value;
+            var sector = document.getElementById('sector-select').value;
+            var sub = document.getElementById('substance-select').value;
+
+            // 【关键逻辑】同时筛选 Region 和 Sector
+            var filteredData = globalData.filter(r => r.Region === region && r.Sector === sector);
+            
+            // 找出这一组数据对应的 Source (可能有多个Source，比如 OFED-v1, OFED-v2)
+            var sources = Array.from(new Set(filteredData.map(r => r.Source)));
+
+            var series = sources.map(src => {
+                var srcRows = filteredData.filter(r => r.Source === src);
+                var data = distinctYears.map(y => {
+                    var row = srcRows.find(r => r.Year === y);
+                    return row ? row[sub] : null;
+                });
+                return { name: src, type: 'line', smooth: true, data: data, symbolSize: 8 };
+            });
+
+            myChart.setOption({
+                title: { text: `${sub} Emissions (${region} - ${sector})`, left: 'center' },
+                tooltip: { trigger: 'axis' },
+                legend: { data: sources, bottom: 0 },
+                xAxis: { type: 'category', data: distinctYears },
+                yAxis: { type: 'value', name: 'Emissions (Mt CO2e)' },
+                series: series
+            }, true);
+        }
+        window.onresize = () => myChart.resize();
     </script>
 </body>
 </html>
