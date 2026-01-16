@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Emissions - OFED</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        .dashboard-layout { display: flex; padding: 20px 5%; gap: 20px; }
+        .sidebar { width: 250px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
+        .main-content { flex: 1; }
+        .chart-box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; height: 500px; }
+        .info-section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">OFED Database</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="inventory.html" style="font-weight:bold; color:var(--primary);">Inventory</a>
+            <a href="inversion.html">Inversion</a>
+            </div>
+        <div class="auth-btn">Login</div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <h3>Filters</h3>
+            <div class="form-group">
+                <label>Substance</label>
+                <select style="width:100%; padding:8px;"><option>HFC-134a</option><option>SF6</option></select>
+            </div>
+            <div class="form-group">
+                <label>Year Range</label>
+                <input type="range" min="1990" max="2025" style="width:100%">
+            </div>
+            <div class="form-group">
+                <label>Region</label>
+                <select style="width:100%; padding:8px;"><option>Global</option><option>China</option><option>USA</option></select>
+            </div>
+            <div class="form-group">
+                <label>Sector</label>
+                <select style="width:100%; padding:8px;"><option>All Sectors</option><option>Refrigeration</option></select>
+            </div>
+            <button class="submit-btn" style="margin-top:20px;">Update Chart</button>
+            <button class="submit-btn" style="margin-top:10px; background:#666;" disabled>Download Data (Login Required)</button>
+        </div>
+
+        <div class="main-content">
+            <div class="chart-box" id="chart-container"></div>
+            
+            <div class="info-section">
+                <h3>Methodology</h3>
+                <p>Detailed description of the bottom-up inventory methodology...</p>
+            </div>
+
+            <div class="info-section">
+                <h3>Publications</h3>
+                <table>
+                    <thead><tr><th>Substance</th><th>Year Range</th><th>Region</th><th>Reference</th></tr></thead>
+                    <tbody>
+                        <tr><td>HFCs</td><td>1990-2020</td><td>China</td><td>Zhang et al. (2024)</td></tr>
+                        <tr><td>SF6</td><td>2000-2022</td><td>Global</td><td>Wang et al. (2025)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化图表 (这里可以复用你之前的 JS 代码逻辑)
+        var myChart = echarts.init(document.getElementById('chart-container'));
+        var option = {
+            title: { text: 'Inventory Emissions Trend' },
+            tooltip: { trigger: 'axis' },
+            xAxis: { type: 'category', data: ['1990', '1995', '2000', '2005', '2010', '2015', '2020'] },
+            yAxis: { type: 'value' },
+            series: [{ data: [120, 132, 101, 134, 90, 230, 210], type: 'line', smooth: true }]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
