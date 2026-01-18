@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Comparison - OFED</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <style>
+        .dashboard-layout { display: flex; padding: 20px 5%; gap: 20px; }
+        .sidebar { width: 250px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
+        .main-content { flex: 1; }
+        .chart-box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; height: 500px; }
+        select { width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; }
+        label { font-weight: bold; font-size: 0.9em; color: #555; display: block; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">OFED Database</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="inventory.html">Inventory</a>
+            <a href="inversion.html">Inversion</a>
+            <a href="comparison.html" style="font-weight:bold; color:#0056b3;">Datasets</a>
+            <a href="team.html">About Team</a>
+        </div>
+        <div class="auth-btn">Login</div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <div class="sidebar">
+            <h3>Comparison Filters</h3>
+            <label>1. Region</label>
+            <select id="region-select"><option>Loading...</option></select>
+            <label>2. Substance</label>
+            <select id="substance-select"><option>Loading...</option></select>
+            <hr style="margin:20px 0; border:0; border-top:1px solid #eee;">
+            <p style="font-size:0.9em; color:#666;">
+                Comparing OFED with other global datasets (EDGAR, NOAA, etc.)
+            </p>
+        </div>
+        <div class="main-content">
+            <div class="chart-box" id="chart-container"></div>
+        </div>
+    </div>
+
+    <script>
+        var myChart = echarts.init(document.getElementById('chart-container'));
+        var globalData = [];
+        var distinctYears = [];
+
+        myChart.showLoading();
+
+        // 【关键修改】读取 comparison.csv
+        Papa.parse("comparison.csv?t=" + new Date().getTime(), {
+            download: true, header: true, dynamicTyping: true, skipEmptyLines: true,
+            complete: function(results) {
+                myChart.hideLoading();
+                var columns = results.meta.fields.map(c => c.trim().replace(/^\ufeff/, ''));
+                var rawData = results.data;
+                
+                if (results.meta.fields[0] !== columns[0]) {
+                    rawData = rawData.map(row => { var newRow = {}; results.meta.fields.forEach((k, i) => newRow[columns[i]] = row[k]); return newRow; });
+                }
+
+                globalData = rawData;
+                distinctYears = Array.from(new Set(rawData.map(r => r.Year))).sort((a,b)=>a-b);
+
+                var regionSel = document.getElementById('region-select');
+                var subSel = document.getElementById('substance-select');
+
+                var regions = Array.from(new Set(globalData.map(r => r.Region))).sort();
+                var substances = columns.filter(c => !['Year','Region','Source'].includes(c));
+
+                regions.forEach(r => regionSel.add(new Option(r, r)));
+                substances.forEach(s => subSel.add(new Option(s, s)));
+
+                regionSel.onchange = updateChart;
+                subSel.onchange = updateChart;
+                updateChart();
+            },
+            error: function() { alert("File not found: comparison.csv"); }
+        });
+
+        function updateChart() {
+            var region = document.getElementById('region-select').value;
+            var sub = document.getElementById('substance-select').value;
+            
+            // 筛选出该区域的所有数据
+            var filteredData = globalData.filter(r => r.Region === region);
+            
+            // 自动找出所有 Source (比如 OFED, EDGAR, EPA...)
+            var sources = Array.from(new Set(filteredData.map(r => r.Source)));
+
+            var series = sources.map(src => {
+                var srcRows = filteredData.filter(r => r.Source === src);
+                var data = distinctYears.map(y => {
+                    var row = srcRows.find(r => r.Year === y);
+                    return row ? row[sub] : null;
+                });
+                return { name: src, type: 'line', smooth: true, data: data, symbolSize: 8 };
+            });
+
+            myChart.setOption({
+                title: { text: `Comparison: ${sub} (${region})`, left: 'center' },
+                tooltip: { trigger: 'axis' },
+                legend: { data: sources, bottom: 0 },
+                xAxis: { type: 'category', data: distinctYears },
+                yAxis: { type: 'value', name: 'Emissions' },
+                series: series
+            }, true);
+        }
+        window.onresize = () => myChart.resize();
+    </script>
+</body>
+</html>
